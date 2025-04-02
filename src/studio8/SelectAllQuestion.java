@@ -11,9 +11,9 @@ public class SelectAllQuestion extends MultipleChoiceQuestion {
 	 * @param answer
 	 * @param choices
 	 */
+	
 	public SelectAllQuestion(String prompt, String answer, String[] choices) {
-		// Hint: 1 point per choice
-		throw new NotYetImplementedException();
+		super(prompt, answer, 1, choices); 
 	}
 	
 	/**
@@ -21,7 +21,10 @@ public class SelectAllQuestion extends MultipleChoiceQuestion {
 	 * @param String givenAnswer to check for points
 	 */
 	public int checkAnswer(String givenAnswer) {
-		throw new NotYetImplementedException();
+		int missing = findMissingCorrectAnswers(givenAnswer); 
+		int wrong = findIncorrectGivenAnswers(givenAnswer); 
+		int initialScore = this.getAnswer().length(); 
+		return Math.max(initialScore- (wrong + missing), 0); 
 	}
 
 	/**
@@ -67,6 +70,8 @@ public class SelectAllQuestion extends MultipleChoiceQuestion {
 	}	
 	
 	public static void main(String[] args) {	
-		
+		String answer3 = "Arizona georgia california"; 
+		String[] choices3 = {"Arizona", "georgia", "california", "boston", "st. louis"};
+		SelectAllQuestion three = new SelectAllQuestion("which of these are US states?", answer3, choices3 );
 	}
 }
